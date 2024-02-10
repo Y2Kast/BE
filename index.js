@@ -1,14 +1,12 @@
 const express = require('express');
-const dbConnection= require('./src/config/dbConfig')
+const bodyParser = require('body-parser');
+const userRoutes = require('./src/routes/userRouter.js');
 
 const app = express();
 const port = 3000;
 
-dbConnection();
-
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+app.use(bodyParser.json());
+app.use('/', userRoutes)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
